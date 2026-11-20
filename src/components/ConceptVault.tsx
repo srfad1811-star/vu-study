@@ -92,7 +92,7 @@ export const ConceptVault: React.FC<ConceptVaultProps> = ({
   }, [highlights, selectedSubjectFilter]);
 
   return (
-    <div className="flex-1 overflow-y-auto bg-slate-50 dark:bg-slate-950 p-6 sm:p-8">
+    <div className="flex-1 overflow-y-auto pastel-canvas p-6 sm:p-8">
       <div className="max-w-6xl mx-auto space-y-6">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">

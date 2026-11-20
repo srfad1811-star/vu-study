@@ -62,12 +62,14 @@ export const Sidebar: React.FC<SidebarProps> = ({
     SUBJECT_COLORS.find((c) => c.id === colorId)?.dotClass ?? 'bg-blue-600';
 
   const content = (
-    <div className="flex flex-col h-full bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 w-[264px] select-none">
+    <div className="flex flex-col h-full pastel-sidebar border-r border-slate-200/80 dark:border-slate-800 w-[264px] select-none">
       {/* Brand header */}
-      <div className="h-14 px-5 flex items-center justify-between border-b border-slate-200 dark:border-slate-800 shrink-0">
+      <div className="h-14 px-4 flex items-center justify-between shrink-0">
         <div className="flex items-center gap-2.5">
-          <Layers className="w-5 h-5 text-blue-700 dark:text-blue-400 shrink-0" />
-          <span className="text-lg font-semibold tracking-tight text-slate-900 dark:text-slate-50 font-display whitespace-nowrap">
+          <span className="w-8 h-8 rounded-xl bg-gradient-to-br from-blue-200 via-blue-100 to-emerald-200 dark:from-blue-800 dark:via-blue-900 dark:to-emerald-800 flex items-center justify-center shadow-sm ring-1 ring-white/70 dark:ring-white/10 shrink-0">
+            <Layers className="w-4 h-4 text-blue-700 dark:text-blue-200" />
+          </span>
+          <span className="text-xl font-semibold text-slate-900 dark:text-slate-50 font-display whitespace-nowrap">
             Codex
           </span>
         </div>
@@ -99,18 +101,28 @@ export const Sidebar: React.FC<SidebarProps> = ({
               }}
               className={`w-full flex items-center justify-between gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                 active
-                  ? 'bg-blue-50 text-blue-800 dark:bg-blue-950/60 dark:text-blue-200'
-                  : 'text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/70 hover:text-slate-900 dark:hover:text-slate-100'
+                  ? 'bg-white text-blue-800 shadow-sm ring-1 ring-blue-100 dark:bg-blue-950/70 dark:text-blue-100 dark:ring-blue-900'
+                  : 'text-slate-600 dark:text-slate-300 hover:bg-white/70 dark:hover:bg-slate-800/70 hover:text-slate-900 dark:hover:text-slate-100'
               }`}
             >
               <span className="flex items-center gap-2.5 truncate">
-                <Icon className={`w-4 h-4 shrink-0 ${active ? 'text-blue-700 dark:text-blue-400' : 'text-slate-400'}`} />
+                <span
+                  className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 transition-colors ${
+                    active
+                      ? 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-200'
+                      : 'bg-white/60 text-slate-400 dark:bg-slate-800/60'
+                  }`}
+                >
+                  <Icon className="w-4 h-4" />
+                </span>
                 <span className="truncate">{item.label}</span>
               </span>
               {typeof item.count === 'number' && (
                 <span
-                  className={`text-xs font-mono tabular-nums ${
-                    active ? 'text-blue-700 dark:text-blue-300' : 'text-slate-400 dark:text-slate-500'
+                  className={`min-w-6 px-1.5 py-0.5 rounded-full text-center text-[11px] font-mono tabular-nums ${
+                    active
+                      ? 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-200'
+                      : 'text-slate-400 dark:text-slate-500'
                   }`}
                 >
                   {item.count}
@@ -121,7 +133,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         })}
       </div>
 
-      <div className="mx-4 border-t border-slate-200 dark:border-slate-800" />
+      <div className="mx-5 border-t border-dashed border-slate-300/70 dark:border-slate-700" />
 
       {/* Subjects Tree */}
       <div className="flex-1 overflow-y-auto px-3 py-4">
@@ -132,7 +144,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           <button
             type="button"
             onClick={onAddSubject}
-            className="inline-flex items-center gap-1 text-xs font-medium text-blue-700 dark:text-blue-400 hover:underline whitespace-nowrap"
+            className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-950/70 text-xs font-medium text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-blue-900 whitespace-nowrap"
           >
             <FolderPlus className="w-3.5 h-3.5" />
             Add
@@ -148,8 +160,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
             }}
             className={`w-full flex items-center justify-between gap-2 px-3 py-2 rounded-lg text-sm transition-colors ${
               selectedSubjectId === 'all'
-                ? 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-100 font-medium'
-                : 'text-slate-600 dark:text-slate-300 hover:bg-slate-100/70 dark:hover:bg-slate-800/50'
+                ? 'bg-white/90 shadow-sm dark:bg-slate-800 text-slate-900 dark:text-slate-100 font-medium'
+                : 'text-slate-600 dark:text-slate-300 hover:bg-white/60 dark:hover:bg-slate-800/50'
             }`}
           >
             <span className="truncate">All Subjects</span>
@@ -171,8 +183,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   key={sub.id}
                   className={`group flex items-center justify-between gap-1 px-3 py-2 rounded-lg text-sm transition-colors ${
                     isSelected
-                      ? 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-100 font-medium'
-                      : 'text-slate-600 dark:text-slate-300 hover:bg-slate-100/70 dark:hover:bg-slate-800/50'
+                      ? 'bg-white/90 shadow-sm dark:bg-slate-800 text-slate-900 dark:text-slate-100 font-medium'
+                      : 'text-slate-600 dark:text-slate-300 hover:bg-white/60 dark:hover:bg-slate-800/50'
                   }`}
                 >
                   <button
@@ -183,7 +195,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                     }}
                     className="flex items-center gap-2.5 min-w-0 flex-1 text-left"
                   >
-                    <span className={`w-2 h-2 rounded-full shrink-0 ${getColorDot(sub.color)}`} />
+                    <span className={`w-2.5 h-2.5 rounded-full shrink-0 ring-2 ring-white dark:ring-slate-900 ${getColorDot(sub.color)}`} />
                     <span className="truncate">{sub.name}</span>
                   </button>
 
@@ -218,9 +230,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
       </div>
 
       {/* Keyboard Hint Footer */}
-      <div className="px-4 py-3 border-t border-slate-200 dark:border-slate-800 text-xs text-slate-400 dark:text-slate-500 flex items-center justify-between">
+      <div className="mx-3 mb-3 px-3 py-2.5 rounded-xl bg-white/60 dark:bg-slate-800/50 text-xs text-slate-500 dark:text-slate-400 flex items-center justify-between">
         <span>Local Vault Storage</span>
-        <span className="font-mono">⌘K Search</span>
+        <span className="font-mono px-1.5 py-0.5 rounded-md bg-emerald-100 text-emerald-800 dark:bg-emerald-900/60 dark:text-emerald-200">⌘K Search</span>
       </div>
     </div>
   );
@@ -232,7 +244,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       {openMobile && (
         <div className="fixed inset-0 z-50 lg:hidden flex">
           <div
-            className="fixed inset-0 bg-slate-950/50 backdrop-blur-[1px]"
+            className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm"
             onClick={onCloseMobile}
           />
           <aside className="relative z-10 h-full">{content}</aside>

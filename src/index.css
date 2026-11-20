@@ -1,34 +1,176 @@
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
 
-@layer base {
-  :root {
-    --font-display: 'Fraunces', Georgia, serif;
-    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
-  }
+/*
+ * Soft pastel theme.
+ * The app's markup uses Tailwind's `slate` (neutrals) and `blue` (primary) scales,
+ * so the whole look is re-skinned here by remapping those scales to a
+ * lavender-tinted neutral and a gentle periwinkle-violet primary, with mint
+ * (emerald) and peach accents.
+ */
+@theme {
+  --font-sans: 'Figtree', system-ui, -apple-system, sans-serif;
+  --font-display: 'Fredoka', 'Figtree', system-ui, sans-serif;
+  --font-mono: 'DM Mono', ui-monospace, SFMono-Regular, monospace;
 
+  /* Lavender-tinted neutrals (replaces slate) */
+  --color-slate-50: oklch(0.982 0.009 295);
+  --color-slate-100: oklch(0.96 0.016 295);
+  --color-slate-200: oklch(0.92 0.024 295);
+  --color-slate-300: oklch(0.855 0.032 295);
+  --color-slate-400: oklch(0.69 0.04 292);
+  --color-slate-500: oklch(0.575 0.045 292);
+  --color-slate-600: oklch(0.47 0.05 290);
+  --color-slate-700: oklch(0.39 0.052 290);
+  --color-slate-800: oklch(0.315 0.048 288);
+  --color-slate-900: oklch(0.255 0.042 288);
+  --color-slate-950: oklch(0.205 0.036 288);
+
+  /* Soft periwinkle-violet primary (replaces blue) */
+  --color-blue-50: oklch(0.972 0.02 292);
+  --color-blue-100: oklch(0.94 0.042 292);
+  --color-blue-200: oklch(0.885 0.072 292);
+  --color-blue-300: oklch(0.81 0.105 290);
+  --color-blue-400: oklch(0.73 0.13 288);
+  --color-blue-500: oklch(0.645 0.155 287);
+  --color-blue-600: oklch(0.575 0.17 286);
+  --color-blue-700: oklch(0.525 0.17 286);
+  --color-blue-800: oklch(0.46 0.16 286);
+  --color-blue-900: oklch(0.385 0.13 286);
+  --color-blue-950: oklch(0.28 0.085 286);
+
+  /* Fresh mint (replaces emerald) */
+  --color-emerald-50: oklch(0.975 0.022 168);
+  --color-emerald-100: oklch(0.945 0.05 168);
+  --color-emerald-200: oklch(0.9 0.08 168);
+  --color-emerald-300: oklch(0.84 0.11 168);
+  --color-emerald-400: oklch(0.77 0.13 167);
+  --color-emerald-500: oklch(0.69 0.135 166);
+  --color-emerald-600: oklch(0.6 0.125 166);
+  --color-emerald-700: oklch(0.51 0.105 166);
+  --color-emerald-800: oklch(0.43 0.085 166);
+  --color-emerald-900: oklch(0.36 0.068 166);
+  --color-emerald-950: oklch(0.26 0.05 166);
+
+  /* Peach accent */
+  --color-peach-100: oklch(0.95 0.035 50);
+  --color-peach-200: oklch(0.91 0.06 50);
+  --color-peach-400: oklch(0.8 0.11 45);
+
+  /* Rounder, friendlier corners */
+  --radius-md: 0.5rem;
+  --radius-lg: 0.8rem;
+  --radius-xl: 1.1rem;
+  --radius-2xl: 1.4rem;
+
+  /* Lavender-tinted soft shadows */
+  --shadow-sm: 0 1px 2px 0 oklch(0.5 0.08 290 / 0.06), 0 2px 6px -1px oklch(0.5 0.08 290 / 0.06);
+  --shadow-md: 0 4px 10px -2px oklch(0.5 0.1 290 / 0.1), 0 2px 4px -2px oklch(0.5 0.1 290 / 0.06);
+  --shadow-lg: 0 12px 24px -8px oklch(0.5 0.12 290 / 0.16), 0 4px 8px -4px oklch(0.5 0.1 290 / 0.08);
+  --shadow-xl: 0 20px 36px -12px oklch(0.5 0.12 290 / 0.2), 0 8px 14px -8px oklch(0.5 0.1 290 / 0.1);
+  --shadow-2xl: 0 32px 64px -20px oklch(0.45 0.14 290 / 0.3);
+
+  --animate-pastel-rise: pastel-rise 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+
+  @keyframes pastel-rise {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@layer base {
   html {
     font-family: var(--font-sans);
   }
 
-  h1, .font-display {
+  h1, h2, h3, .font-display {
     font-family: var(--font-display);
+    letter-spacing: -0.005em;
   }
 
   code, pre, .font-mono {
     font-family: var(--font-mono);
   }
+
+  button {
+    cursor: pointer;
+  }
+
+  button:disabled {
+    cursor: not-allowed;
+  }
+
+  :where(button, a, input, select, textarea, [tabindex]):focus-visible {
+    outline: 2px solid var(--color-blue-400);
+    outline-offset: 2px;
+  }
+}
+
+/* Gentle tactile press feedback for buttons */
+@layer utilities {
+  button:not(:disabled):active {
+    transform: translateY(1px) scale(0.985);
+  }
+  button {
+    transition-property: color, background-color, border-color, box-shadow, transform, opacity;
+    transition-duration: 160ms;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
+
+/* Dreamy pastel canvas behind the main views */
+.pastel-canvas {
+  background-color: var(--color-slate-50);
+  background-image:
+    radial-gradient(42rem 28rem at 0% 0%, oklch(0.93 0.05 292 / 0.75), transparent 70%),
+    radial-gradient(36rem 26rem at 100% 100%, oklch(0.94 0.055 168 / 0.7), transparent 70%),
+    radial-gradient(28rem 20rem at 100% 0%, oklch(0.95 0.04 50 / 0.6), transparent 70%);
+  background-attachment: fixed;
+}
+
+.dark .pastel-canvas {
+  background-color: var(--color-slate-950);
+  background-image:
+    radial-gradient(42rem 28rem at 0% 0%, oklch(0.32 0.08 292 / 0.45), transparent 70%),
+    radial-gradient(36rem 26rem at 100% 100%, oklch(0.32 0.06 168 / 0.35), transparent 70%),
+    radial-gradient(28rem 20rem at 100% 0%, oklch(0.3 0.05 40 / 0.25), transparent 70%);
+}
+
+/* Sidebar wash */
+.pastel-sidebar {
+  background-color: oklch(0.99 0.006 295);
+  background-image: linear-gradient(
+    175deg,
+    oklch(0.965 0.026 292) 0%,
+    oklch(0.985 0.01 295) 45%,
+    oklch(0.97 0.03 168) 100%
+  );
+}
+
+.dark .pastel-sidebar {
+  background-color: var(--color-slate-900);
+  background-image: linear-gradient(
+    175deg,
+    oklch(0.28 0.055 292) 0%,
+    var(--color-slate-900) 45%,
+    oklch(0.26 0.04 168) 100%
+  );
 }
 
 .tabular-nums {
   font-variant-numeric: tabular-nums;
 }
 
-/* Subtle custom scrollbars */
+/* Soft lavender scrollbars */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -36,12 +178,25 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(148, 163, 184, 0.35);
-  border-radius: 3px;
+  background: oklch(0.8 0.06 292 / 0.55);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(100, 116, 139, 0.55);
+  background: oklch(0.7 0.09 290 / 0.7);
+  background-clip: padding-box;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  button:not(:disabled):active {
+    transform: none;
+  }
 }
 
 @media print {
@@ -55,6 +210,9 @@
   }
   body {
     background: #ffffff !important;
-    color: #0f172a !important;
+    color: #1f1a2e !important;
+  }
+  .pastel-canvas {
+    background: #ffffff !important;
   }
 }
