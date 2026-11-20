@@ -355,7 +355,7 @@ export const NotesStudio: React.FC<NotesStudioProps> = ({
       </section>
 
       {/* Main Editor & Study Workspace */}
-      <section className="flex-1 flex flex-col min-w-0 bg-slate-50 dark:bg-slate-950">
+      <section className="flex-1 flex flex-col min-w-0 pastel-canvas">
         {!activeNote ? (
           <div className="flex-1 flex items-center justify-center p-8">
             <div className="max-w-md text-center space-y-4">
@@ -665,7 +665,7 @@ export const NotesStudio: React.FC<NotesStudioProps> = ({
 
               {(mode === 'study' || mode === 'split') && (
                 <div
-                  className={`flex-1 min-h-0 overflow-y-auto p-6 sm:p-8 bg-slate-50/50 dark:bg-slate-950 ${
+                  className={`flex-1 min-h-0 overflow-y-auto p-6 sm:p-8 bg-white/40 dark:bg-slate-950/40 ${
                     mode === 'split' ? 'w-1/2' : 'w-full'
                   }`}
                 >

@@ -139,10 +139,10 @@ export const HIGHLIGHT_META: Record<
 };
 
 export const SUBJECT_COLORS = [
-  { id: 'cobalt', label: 'Cobalt', dotClass: 'bg-blue-600' },
-  { id: 'emerald', label: 'Emerald', dotClass: 'bg-emerald-600' },
-  { id: 'amber', label: 'Amber', dotClass: 'bg-amber-600' },
-  { id: 'rose', label: 'Crimson', dotClass: 'bg-rose-600' },
-  { id: 'violet', label: 'Indigo', dotClass: 'bg-indigo-600' },
-  { id: 'slate', label: 'Graphite', dotClass: 'bg-slate-600' },
+  { id: 'cobalt', label: 'Lavender', dotClass: 'bg-blue-500' },
+  { id: 'emerald', label: 'Mint', dotClass: 'bg-emerald-500' },
+  { id: 'amber', label: 'Honey', dotClass: 'bg-amber-400' },
+  { id: 'rose', label: 'Blush', dotClass: 'bg-rose-400' },
+  { id: 'violet', label: 'Sky', dotClass: 'bg-sky-400' },
+  { id: 'slate', label: 'Lilac Gray', dotClass: 'bg-slate-400' },
 ];

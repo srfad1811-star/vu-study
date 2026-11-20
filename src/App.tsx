@@ -518,7 +518,8 @@ export default function App() {
 
   if (!ready) {
     return (
-      <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex items-center justify-center text-sm text-slate-500 dark:text-slate-400">
+      <div className="min-h-screen pastel-canvas flex flex-col items-center justify-center gap-3 text-sm text-slate-500 dark:text-slate-400">
+        <span className="w-10 h-10 rounded-2xl bg-gradient-to-br from-blue-200 to-emerald-200 dark:from-blue-800 dark:to-emerald-800 animate-pulse" />
         Loading workspace...
       </div>
     );

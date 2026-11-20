@@ -193,7 +193,7 @@ export const ActiveStudy: React.FC<ActiveStudyProps> = ({
   );
 
   return (
-    <div className="flex-1 overflow-y-auto bg-slate-50 dark:bg-slate-950 p-6 sm:p-8">
+    <div className="flex-1 overflow-y-auto pastel-canvas p-6 sm:p-8">
       <div className="max-w-6xl mx-auto space-y-6">
         {/* Header + Sub-mode Segmented Tabs */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
